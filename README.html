@@ -1,0 +1,117 @@
+<h1 id="git_things">Git Things:</h1>
+
+<p><strong>For anybody who&#8217;s interested</strong></p>
+
+<p>First of all, you&#8217;ll want to clone your remote repository. To do this use</p>
+
+<pre><code>git clone git@myPrivateGitURL
+</code></pre>
+
+<p>You can pull updates from that URL using</p>
+
+<pre><code>git pull
+</code></pre>
+
+<p>or push commits using</p>
+
+<pre><code>git push
+</code></pre>
+
+<p>Enough with the &#8216;basics&#8217; already!</p>
+
+<p>To reset your local branch back to the remote branch (delete any local changes you&#8217;ve made), use</p>
+
+<pre><code> git reset --hard
+</code></pre>
+
+<p>This is also really handy if you want to see where your local branch is at.
+Typing this will tell you the last commit message, and you&#8217;ll be able to work from there.</p>
+
+<p>If you want to go back one step i.e. <strong>undo</strong> a commit, use</p>
+
+<pre><code>git reset HEAD~1
+</code></pre>
+
+<p>the number after the tidle ~ refers to how many commits you want to step back (one in the case above)</p>
+
+<p>To add a remote repository (e.g. someone elses)</p>
+
+<pre><code> git remote add remoteName git://url
+</code></pre>
+
+<p>where remoteName is the name you want to give this person&#8217;s repository, and git://url is the URL for their repository</p>
+
+<p>Then you&#8217;ll want to fetch info from that repository.
+git fetch is like git pull, but doesn&#8217;t merge to any branch.
+git pull is a git fetch followed by a git merge onto the current branch</p>
+
+<pre><code>  git fetch
+</code></pre>
+
+<p>now that the remote repository&#8217;s commits are on your computer, you&#8217;ll want to check out a branch of this remote repository</p>
+
+<pre><code>git checkout -b someonesBranch remoteName/remoteBranch
+</code></pre>
+
+<p>where remoteBranch is the remote branch you want to look at and someonesBranch is the name you want to give your local copy of this branch</p>
+
+<p>the -b basically says &#8220;you&#8217;ll need to make a new branch when checking this out&#8221;. It also ties the two together for future pulls/pushes</p>
+
+<p>You can now play with this branch, build, test etc.
+If it&#8217;s good, and want to add it to the main branch, try</p>
+
+<pre><code>  git checkout mainBranch
+  git merge someonesBranch
+</code></pre>
+
+<p>where mainBranch would be <strong>your</strong> main, local branch (connected to your git repository)</p>
+
+<p>Note that git merge will add <strong>all</strong> the commits from someonesBranch to the main branch.
+You may only want to add a few of the commits, if so you can &#8220;cherry-pick&#8221; which ones.
+To avoid merge conflicts you must start with the earliest commit you want to add.</p>
+
+<pre><code> git cherry-pick SHA-commitDate-01/01/2010
+</code></pre>
+
+<p>Which will add one commit.</p>
+
+<p>Note that you need to be in the branch you want the commits pulling to. e.g. I want to add commits from someonesBranch to mainBranch, so I must</p>
+
+<pre><code>git checkout mainBranch
+</code></pre>
+
+<p>first.
+You can pull commits from anywhere as long as you have the commit SHA (long 2342ecf9d98edcdfe9987a987ef897d thing)
+To see what the SHA is for a specifiec commit, see github or type</p>
+
+<pre><code>git log
+</code></pre>
+
+<p>on the branch you&#8217;re interested in. It&#8217;ll show you everything for as far back as you want
+To get out of this just use CTRL + Z like on any terminal process</p>
+
+<p>If you get a warning about the automatic cherrypick failing, then you have merge problems.
+What this means is that the file(s) in question have changed between your branch (mainBranch) and the commit you&#8217;ve just cherry picked. That is, there&#8217;s a commit somewhere before 01/01/2010 that changes that file.
+Use</p>
+
+<pre><code>git status
+</code></pre>
+
+<p>to see what and where these conflicts lie.</p>
+
+<p>No problems? Solved that? You can cherry pick a commit from a later date now</p>
+
+<pre><code>git cherry-pick SHA-commitDate-10/01/2010
+</code></pre>
+
+<p>as long as there are no merge problems ;)</p>
+
+<p>Now pushing may also be a problem.
+If you want to push to your remote repository remoteRepository, and more specifically to the branch remoteRepository/remoteBranch
+BUT your local branch you&#8217;re going to push is not called the same thing as your remote branch, you&#8217;ll get an error on pushing.
+What you need to do is</p>
+
+<pre><code>git push remoteRepository localBranch:remoteBranch
+</code></pre>
+
+<p>This is saying &#8220;push to remoteRepository my local branch to the remote branch&#8221;</p>
