@@ -38,9 +38,11 @@ Then you'll want to fetch info from that repository.
 git fetch is like git pull, but doesn't merge to any branch.
 git pull is a git fetch followed by a git merge onto the current branch
 
-      git fetch
+      git fetch remoteName
 
-now that the remote repository's commits are on your computer, you'll want to check out a branch of this remote repository
+where remote name is the name of the remote repository you've just added in the previous command.
+
+Now that the remote repository's commits are on your computer, you'll want to check out a branch of this remote repository
 
  	git checkout -b someonesBranch remoteName/remoteBranch
 

@@ -45,10 +45,12 @@ Typing this will tell you the last commit message, and you&#8217;ll be able to w
 git fetch is like git pull, but doesn&#8217;t merge to any branch.
 git pull is a git fetch followed by a git merge onto the current branch</p>
 
-<pre><code>  git fetch
+<pre><code>  git fetch remoteName
 </code></pre>
 
-<p>now that the remote repository&#8217;s commits are on your computer, you&#8217;ll want to check out a branch of this remote repository</p>
+<p>where remote name is the name of the remote repository you&#8217;ve just added in the previous command.</p>
+
+<p>Now that the remote repository&#8217;s commits are on your computer, you&#8217;ll want to check out a branch of this remote repository</p>
 
 <pre><code>git checkout -b someonesBranch remoteName/remoteBranch
 </code></pre>
