@@ -117,3 +117,25 @@ What you need to do is</p>
 </code></pre>
 
 <p>This is saying &#8220;push to remoteRepository my local branch to the remote branch&#8221;</p>
+
+<p>If you do some silly things with your commits, like commit something wrong, or accidentally merge an already-merged commit, you will want to use</p>
+
+<pre><code>git rebase -i SHA-1
+</code></pre>
+
+<p>the -i basically opens up your preferred editor and makes changing commits easier. The SHA-1 is the commit before the bad one (i.e. its parent)</p>
+
+<p>Once you&#8217;ve done this, you can amend commits using</p>
+
+<pre><code> git commit --amend
+</code></pre>
+
+<p>and finish the rebase using</p>
+
+<pre><code> git rebase --continue
+</code></pre>
+
+<p>If you&#8217;ve pushed to a remote branch on your repository for testing or pull request purposes, and would like to delete the remote branch, use</p>
+
+<pre><code>git push origin :nameOfBranchToDelete
+</code></pre>
