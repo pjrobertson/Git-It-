@@ -3,6 +3,8 @@ Git Things:
 
 **For anybody who's interested**
 
+==Git Basics==
+
 First of all, you'll want to clone your remote repository. To do this use
 
     git clone git@myPrivateGitURL
@@ -17,6 +19,8 @@ or push commits using
 
 Enough with the 'basics' already!
 
+==Resetting/Removing Your Changes==
+
 To reset your local branch back to the remote branch (delete any local changes you've made), use
 
      git reset --hard
@@ -28,6 +32,8 @@ If you want to go back one step i.e. **undo** a commit, use
     git reset HEAD~1
 
 the number after the tidle ~ refers to how many commits you want to step back (one in the case above)
+
+==Adding &amp; Getting Remote Commits==
 
 To add a remote repository (e.g. someone elses)
 
@@ -42,6 +48,8 @@ git pull is a git fetch followed by a git merge onto the current branch
 
 where remote name is the name of the remote repository you've just added in the previous command.
 
+==Creating a Local Branch==
+
 Now that the remote repository's commits are on your computer, you'll want to check out a branch of this remote repository
 
  	git checkout -b someonesBranch remoteName/remoteBranch
@@ -50,6 +58,8 @@ where remoteBranch is the remote branch you want to look at and someonesBranch i
 
 the -b basically says "you'll need to make a new branch when checking this out". It also ties the two together for future pulls/pushes
 
+==Merging Branches==
+
 You can now play with this branch, build, test etc.
 If it's good, and want to add it to the main branch, try
 
@@ -57,6 +67,8 @@ If it's good, and want to add it to the main branch, try
       git merge someonesBranch
 
 where mainBranch would be **your** main, local branch (connected to your git repository)
+
+==Cherry Picking Commits==
 
 Note that git merge will add **all** the commits from someonesBranch to the main branch.
 You may only want to add a few of the commits, if so you can "cherry-pick" which ones.
@@ -72,19 +84,32 @@ Note that you need to be in the branch you want the commits pulling to. e.g. I w
 
 first.
 You can pull commits from anywhere as long as you have the commit SHA (long 2342ecf9d98edcdfe9987a987ef897d thing)
-To see what the SHA is for a specifiec commit, see github or type
+
+==Commit History
+
+To see the commit history or what the SHA is for a specifiec commit, see github or type
 
     git log
 
 on the branch you're interested in. It'll show you everything for as far back as you want
 To get out of this just use CTRL + Z like on any terminal process
 
-If you get a warning about the automatic cherrypick failing, then you have merge problems.
+==Merge Conflicts==
+
+If you get a warning about the automatic cherry-pick failing, then you have merge problems.
 What this means is that the file(s) in question have changed between your branch (mainBranch) and the commit you've just cherry picked. That is, there's a commit somewhere before 01/01/2010 that changes that file.
 Use
 
     git status
 to see what and where these conflicts lie.
+
+If you want use a nice GUI to solve the merge conflicts
+
+     git mergetool
+
+will let you use FileMerge (Mac OS X) to see the difference between two files and select which one is the best for your final commit
+
+==Pushing Back to Remote==
 
 No problems? Solved that? You can cherry pick a commit from a later date now
 
@@ -99,6 +124,8 @@ What you need to do is
     git push remoteRepository localBranch:remoteBranch
 This is saying "push to remoteRepository my local branch to the remote branch"
 
+==Rebasing Commits==
+
 If you do some silly things with your commits, like commit something wrong, or accidentally merge an already-merged commit, you will want to use
 
     git rebase -i SHA-1
@@ -111,12 +138,8 @@ and finish the rebase using
 
      git rebase --continue
 
+==Deleting Remote Branches==
+
 If you've pushed to a remote branch on your repository for testing or pull request purposes, and would like to delete the remote branch, use
 
     git push origin :nameOfBranchToDelete
-
-If you've ever wandered into the realm of merge conflicts, git offers an easier GUI way to edit these.
-
-     git mergetool
-
-will let you use FileMerge (Mac OS X) to see the difference between two files and select which one is the best for your final commit
