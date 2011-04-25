@@ -114,3 +114,9 @@ and finish the rebase using
 If you've pushed to a remote branch on your repository for testing or pull request purposes, and would like to delete the remote branch, use
 
     git push origin :nameOfBranchToDelete
+
+If you've ever wandered into the realm of merge conflicts, git offers an easier GUI way to edit these.
+
+     git mergetool
+
+will let you use FileMerge (Mac OS X) to see the difference between two files and select which one is the best for your final commit
