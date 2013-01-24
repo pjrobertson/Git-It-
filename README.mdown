@@ -154,3 +154,13 @@ Deleting Remote Branches
 If you've pushed to a remote branch on your repository for testing or pull request purposes, and would like to delete the remote branch, use
 
     git push origin :nameOfBranchToDelete
+
+If somebody else is playing with a remote repo that you have write access to, it's possible that a branch you've downloaded locally (say `origin/myNewBranch`) has been removed from the remote. So now you have a local branch which points to nothing on the remote. You can remove these using `git remote prune`:
+
+    git remote prune origin
+    
+If you want to do some proper house cleaning, then run:
+
+    git gc
+
+See `man git-prune` for more info
